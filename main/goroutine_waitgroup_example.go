@@ -6,14 +6,23 @@ import (
 )
 
 var wg = sync.WaitGroup{}
+var counter = 0
 
 func main() {
-	var msg = "Hello"
-	wg.Add(1)
-	go func(msg string) {
-		fmt.Println(msg)
-		wg.Done()
-	}(msg)
-	msg = "Goodbye"
+	for i := 0; i < 10; i++ {
+		wg.Add(2)
+		go sayHello()
+		go increment()
+	}
 	wg.Wait()
+}
+
+func sayHello(){
+	fmt.Println("Hello #%v\n", counter)
+	wg.Done()
+}
+
+func increment(){
+	counter++
+	wg.Done()
 }
