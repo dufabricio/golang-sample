@@ -6,6 +6,7 @@ import (
 )
 
 func main() {
+
 	var msg = "Hello"
 	go func() {
 		fmt.Println(msg)
